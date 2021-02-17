@@ -9,6 +9,8 @@ import UIKit
 
 class HomeViewController: UIViewController {
     
+    private var colorList :[UIColor] = (1...8).map( {_ in UIColor.random} )
+    
     @IBOutlet weak var collectionView: UICollectionView!
     override func viewDidLoad() {
         self.navigationController?.navigationBar.isHidden = true
@@ -54,7 +56,7 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
         
         
         if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MyCell", for: indexPath) as? UICollectionViewCell {
-            cell.backgroundColor = .random
+            cell.backgroundColor = colorList[indexPath.row]
             return cell
             
         }else {
@@ -65,7 +67,7 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 9
+        return colorList.count
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
